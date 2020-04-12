@@ -1,35 +1,92 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Kevin's Weather App</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    </head>
-    <body>
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Kevin's Weather App</a>
-        </nav>
-        
+    <title>Kevin's Weather App</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body class="bg-dark">
+    <!--Title bar-->
+    <nav class="navbar navbar-dark bg-secondary">
+        <a class="navbar-brand" href="#">Kevin's Weather App</a>
+    </nav>
+
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3" style="background-color: lightgray; width: 25%; height: 100%">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
+            <div class="col-md-3 sm-12 bg-secondary">
+                <h4>Search for a City:</h4>
+                <input class="form-control mr-sm-2" id="city-search" style="margin-bottom:0px;" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="city-search-button" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                <div class="card" style="width: 100%; margin-bottom:18px;">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Cras justo odio</li>
+                      <li class="list-group-item">Dapibus ac facilisis in</li>
+                      <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
             </div>
-
             <div class="col-md-9">
-                <div class="card background-color: black">
-                
+                <div class="row">
+                    <div class="card bg-secondary" style="width:100%; margin:10px; padding:20px">
+                        <h2 id="city-name" style="padding-bottom:10px">City <span id="current-month"></span><span id="current-day"></span><span id="current-year"></span></h2>
+                        <p>Temperature: <span id="city-temp-current"></span></p>
+                        <p>Humidity: <span id="city-humidity-current"></span></p>
+                        <p>Wind Speed: <span id="city-wind-current"></span></p>
+                        <p>UV Index: <span id="city-uv-current"></span></p>
+                    </div>
+                </div>
+            
+                <h2>5-Day Forecast:</h2>
+                <div class="row">
+                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span id="month1"></span><span id="day1">/</span><span id="year1"></span></h5>
+                            <p class="card-text">Temp: <span id="day1-temp"></span></p>
+                            <p class="card-text">Humidity: <span id="day1-humidity"></span></p>
+                        </div>
+                    </div>
+                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span id="month2"></span><span id="day2">/</span><span id="year2"></span></h5>
+                            <p class="card-text">Temp: <span id="day1-temp"></span></p>
+                            <p class="card-text">Humidity: <span id="day1-humidity"></span></p>
+                        </div>
+                    </div>
+                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span id="month3"></span><span id="day3">/</span><span id="year3"></span></h5>
+                            <p class="card-text">Temp: <span id="day1-temp"></span></p>
+                            <p class="card-text">Humidity: <span id="day1-humidity"></span></p>
+                        </div>
+                    </div>
+                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span id="month4"></span><span id="day4"></span><span id="year4"></span></h5>
+                            <p class="card-text">Temp: <span id="day1-temp"></span></p>
+                            <p class="card-text">Humidity: <span id="day1-humidity"></span></p>
+                        </div>
+                    </div>
+                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span id="month5">/</span><span id="day5">/</span><span id="year5"></span></h5>
+                            <p class="card-text">Temp: <span id="day1-temp"></span></p>
+                            <p class="card-text">Humidity: <span id="day1-humidity"></span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./script.js"></script>
+</body>
 
-        </script>
-    </body>
 </html>
