@@ -46,14 +46,12 @@ $(".list-group-item").on("click", "", function (event) {
 // Appends city weather and forecasts to screen
 function currentCityWeather(e, cityInput) {
     e.preventDefault();
-    location.reload;
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&units=imperial&appid=" + key,
         async: false,
         method: "GET"
     }).then(function (currentResponse) {
         console.log(currentResponse);
-        localStorage.clear();
         cityList.push(currentResponse.name);
         localStorage.setItem("Searched Cities", cityList);
 
@@ -112,26 +110,15 @@ function currentCityWeather(e, cityInput) {
             $("body").css({ "background-color": "#222222", "color": "white" });
         }
 
-
-        for(var i = 0; i < cityList.length; i++) {
-            if (currentResponse.name === cityList[i]) {
-                sameCity = true;
-                break;
-            }
-        }
-
-        if (sameCity === false) {
-            var searchedCityLink = $("<a>");
-            searchedCityLink.attr("href", "#");
-            searchedCityLink.addClass("city-list-button");
-            var searchedCity = $("<li>");
-            searchedCity.addClass("list-group-item");
-            searchedCity.text(currentResponse.name);
-            searchedCityLink.append(searchedCity);
-            $("#city-search-list").append(searchedCityLink);
-        }
-
-        sameCity = false;
+        // Add 
+        var searchedCityLink = $("<a>");
+        searchedCityLink.attr("href", "#");
+        searchedCityLink.addClass("city-list-button");
+        var searchedCity = $("<li>");
+        searchedCity.addClass("list-group-item");
+        searchedCity.text(currentResponse.name);
+        searchedCityLink.append(searchedCity);
+        $("#city-search-list").append(searchedCityLink);
 
         forecastedCityWeather(e, currentLatitude, currentLongitude);
     }).catch(function (error) {
