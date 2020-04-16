@@ -1,6 +1,7 @@
 var key = "808d3ba8df6ac4e4cd1c7957a8c1af5a";
 var cityCounter = 0;
 var cityList = [];
+var sameCity = false;
 
 // Import current date
 var currentDate = new Date();
@@ -17,15 +18,35 @@ for (var i = 1; i <= 5; i++) {
     $("#year" + i).text(currentDate.getFullYear());
     currentDate.setDate(currentDate.getDate() - i);
 }
+// Import cities to search history from localStorage
+if (localStorage.getItem("Searched Cities") !== null) {
+    var searchedCities = localStorage.getItem("Searched Cities").split(",");
+    for (var i = 0; i < searchedCities.length; i++) {
+        var searchedCityLink = $("<a>");
+        searchedCityLink.attr("href", "#");
+        searchedCityLink.addClass("city-list-button");
+        var searchedCity = $("<li>");
+        searchedCity.addClass("list-group-item");
+        searchedCity.text(searchedCities[i]);
+        searchedCityLink.append(searchedCity);
+        $("#city-search-list").append(searchedCityLink);
+    }
+}
+
 
 // Clicking on search
 $("#city-search-button").on("click", function (event) {
     currentCityWeather(event, $("#city-search").val().trim());
 });
 
+$(".list-group-item").on("click", "", function (event) {
+    currentCityWeather(event, $(this)[0].innerHTML);
+});
+
 // Appends city weather and forecasts to screen
 function currentCityWeather(e, cityInput) {
     e.preventDefault();
+    location.reload;
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&units=imperial&appid=" + key,
         async: false,
@@ -33,9 +54,8 @@ function currentCityWeather(e, cityInput) {
     }).then(function (currentResponse) {
         console.log(currentResponse);
         localStorage.clear();
-        localStorage.setItem("Current City", JSON.stringify(currentResponse));
-        cityList.push(currentResponse);
-        localStorage.setItem("Searched Cities", JSON.stringify(cityList));
+        cityList.push(currentResponse.name);
+        localStorage.setItem("Searched Cities", cityList);
 
         // City name
         console.log(currentResponse.name);
@@ -52,7 +72,7 @@ function currentCityWeather(e, cityInput) {
         // City current wind speed
         console.log(Math.round(currentResponse.wind.speed) + "mph");
         $("#city-wind-current").text(Math.round(currentResponse.wind.speed) + " mph");
-        
+
         // City wind direction
         // Credit: https://stackoverflow.com/questions/7490660/converting-wind-direction-in-angles-to-text-words
         $("#city-direction-current").text(degreesToCompass(currentResponse.wind.deg));
@@ -76,7 +96,7 @@ function currentCityWeather(e, cityInput) {
         console.log("Sunset: " + sunsetTimeStamp);
         console.log(currentDate);
 
-        // Check if time is past sunrise but not past sunset
+        // Check if time is past sunrise but not past sunset, set to light mode
         if (currentDate >= sunriseTimeStamp && currentDate < sunsetTimeStamp) {
             console.log("Day time");
             $("#search-sidebar").addClass("bg-light").removeClass("bg-dark");
@@ -84,18 +104,34 @@ function currentCityWeather(e, cityInput) {
             $("body").css({ "background-color": "white", "color": "black" });
         }
 
-        // Check if time is past sunset
-        else if (currentDate >= sunsetTimeStamp) {
+        // Check if time is past sunset, set to dark mode
+        else {
             console.log("Night time");
             $("#search-sidebar").addClass("bg-dark").removeClass("bg-light");
             $("#main").addClass("bg-dark").removeClass("bg-light");
             $("body").css({ "background-color": "#222222", "color": "white" });
         }
 
-        var searchedCity = $("<li>");
-        searchedCity.addClass("list-group-item");
-        searchedCity.text(currentResponse.name);
-        $("#searched-city-list").append(searchedCity);
+
+        for(var i = 0; i < cityList.length; i++) {
+            if (currentResponse.name === cityList[i]) {
+                sameCity = true;
+                break;
+            }
+        }
+
+        if (sameCity === false) {
+            var searchedCityLink = $("<a>");
+            searchedCityLink.attr("href", "#");
+            searchedCityLink.addClass("city-list-button");
+            var searchedCity = $("<li>");
+            searchedCity.addClass("list-group-item");
+            searchedCity.text(currentResponse.name);
+            searchedCityLink.append(searchedCity);
+            $("#city-search-list").append(searchedCityLink);
+        }
+
+        sameCity = false;
 
         forecastedCityWeather(e, currentLatitude, currentLongitude);
     }).catch(function (error) {

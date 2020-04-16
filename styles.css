@@ -4,12 +4,11 @@
     margin:10px;
 }
 
-.dark-mode {
-    background-color: #222222;
-    color: white;
-}
-
 .light-mode {
     background-color: white;
+    color: black;
+}
+
+.list-group-item {
     color: black;
 }
