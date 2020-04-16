@@ -16,108 +16,115 @@
 
 </head>
 
-<body class="bg-dark">
+<body>
     <!--Title bar-->
-    <nav class="navbar navbar-dark bg-secondary">
+    <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Kevin's Weather App</a>
     </nav>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 sm-12 bg-secondary">
+            <!-- Search and search history left column -->
+            <div class="col-md-4 col-xl-2 bd-sidebar collapsible bg-light" id="search-sidebar">
+                <!-- Search bar -->
                 <h4>Search for a City:</h4>
-                <form class="form-inline">
+                
+                <form class="form-inline input-group navbar-expand-lg">
                     <input class="form-control" id="city-search" style="margin-bottom:0px;" type="search"
                         placeholder="Search" aria-label="Search">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary my-2 my-sm-0" id="city-search-button" type="submit"><span
+                        <button class="btn btn-primary" id="city-search-button" type="submit"><span
                                 class="fa fa-search"></span>
                         </button>
                     </span>
+                    <!-- <button class="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-3 collapsible" type="button"
+                        data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav"
+                        aria-expanded="false" aria-label="Toggle docs navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"
+                            focusable="false">
+                            <title>City Search History</title>
+                            <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+                                d="M4 7h22M4 15h22M4 23h22">
+                            </path>
+                        </svg>
+                    </button> -->
                 </form>
-                <!-- <div class="card" style="width: 100%; margin-bottom:18px;"> -->
-                <!-- <ul class="list-group list-group-flush"> -->
-                <!--Search history goes here-->
-                <!-- <li class="list-group-item">Cras justo odio</li> -->
-                <!-- </ul> -->
-                <!-- </div> -->
+                <div id="error-message"></div>
+
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                      </ul>
+                </div>
             </div>
-            <div class="col-md-9">
+
+            <!-- Weather display right column -->
+            <div class="col-md-8 sm-12">
                 <div class="row">
-                    <div class="card bg-secondary" style="width:100%; margin:10px; padding:20px">
-                        <h2 id="city-name" style="padding-bottom:10px">City
-                            <span id="current-month"></span>
-                            <span id="current-day"></span>
-                            <span id="current-year"></span>
+                    <div class="card" id="main" style="width:100%; margin:10px; padding:20px">
+                        <h2 id="city-name" style="padding-bottom:10px">Welcome!
                         </h2>
+                        <h4><span id="current-month"></span><span id="current-day"></span><span id="current-year"></span></h4>
                         <div id="icon"><img id="current-icon" src="" alt="Weather icon"></div>
-                        <p>Temperature: <span id="city-temp-current"></span></p>
-                        <p>Humidity: <span id="city-humidity-current"></span></p>
-                        <p>Wind Speed: <span id="city-wind-current"></span></p>
-                        <p>UV Index: <span id="city-uv-current"></span></p>
+                        <p>Temperature: <span id="city-temp-current">N/A</span></p>
+                        <p>Humidity: <span id="city-humidity-current">N/A</span></p>
+                        <p>Wind Speed: <span id="city-wind-current">N/A</span> <span id="city-direction-current"></span></p>
+                        <p>UV Index: <span id="city-uv-current">N/A</span></p>
                     </div>
                 </div>
 
                 <h2>5-Day Forecast:</h2>
                 <div class="row">
-                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                    <div class="card five-day-card bg-primary">
                         <div class="card-body">
-                            <h5 class="card-title">
-                                <span id="month1"></span>
-                                <span id="day1"></span>
-                                <span id="year1"></span>
+                            <h5 class="card-title"><span id="month1"></span><span id="day1"></span><span
+                                    id="year1"></span>
                             </h5>
                             <div id="icon"><img id="day1-icon" src="" alt="Weather icon"></div>
-                            <p class="card-text">Temp: <span id="day1-temp"></span></p>
-                            <p class="card-text">Humidity: <span id="day1-humidity"></span></p>
+                            <p class="card-text">Temp: <span id="day1-temp">N/A</span></p>
+                            <p class="card-text">Humidity: <span id="day1-humidity">N/A</span></p>
                         </div>
                     </div>
-                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                    <div class="card five-day-card bg-primary">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <span id="month2"></span>
-                                <span id="day2"></span>
-                                <span id="year2"></span>
+                                <span id="month2"></span><span id="day2"></span><span id="year2"></span>
                             </h5>
                             <div id="icon"><img id="day2-icon" src="" alt="Weather icon"></div>
-                            <p class="card-text">Temp: <span id="day2-temp"></span></p>
-                            <p class="card-text">Humidity: <span id="day2-humidity"></span></p>
+                            <p class="card-text">Temp: <span id="day2-temp">N/A</span></p>
+                            <p class="card-text">Humidity: <span id="day2-humidity">N/A</span></p>
                         </div>
                     </div>
-                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                    <div class="card five-day-card bg-primary">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <span id="month3"></span>
-                                <span id="day3"></span>
-                                <span id="year3"></span>
+                                <span id="month3"></span><span id="day3"></span><span id="year3"></span>
                             </h5>
                             <div id="icon"><img id="day3-icon" src="" alt="Weather icon"></div>
-                            <p class="card-text">Temp: <span id="day3-temp"></span></p>
-                            <p class="card-text">Humidity: <span id="day3-humidity"></span></p>
+                            <p class="card-text">Temp: <span id="day3-temp">N/A</span></p>
+                            <p class="card-text">Humidity: <span id="day3-humidity">N/A</span></p>
                         </div>
                     </div>
-                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                    <div class="card five-day-card bg-primary">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <span id="month4"></span>
-                                <span id="day4"></span>
-                                <span id="year4"></span>
+                                <span id="month4"></span><span id="day4"></span><span id="year4"></span>
                             </h5>
                             <div id="icon"><img id="day4-icon" src="" alt="Weather icon"></div>
-                            <p class="card-text">Temp: <span id="day4-temp"></span></p>
-                            <p class="card-text">Humidity: <span id="day4-humidity"></span></p>
+                            <p class="card-text">Temp: <span id="day4-temp">N/A</span></p>
+                            <p class="card-text">Humidity: <span id="day4-humidity">N/A</span></p>
                         </div>
                     </div>
-                    <div class="card bg-primary" style="width:12rem; margin:10px;">
+                    <div class="card five-day-card bg-primary">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <span id="month5"></span>
-                                <span id="day5"></span>
-                                <span id="year5"></span>
+                                <span id="month5"></span><span id="day5"></span><span id="year5"></span>
                             </h5>
                             <div id="icon"><img id="day5-icon" src="" alt="Weather icon"></div>
-                            <p class="card-text">Temp: <span id="day5-temp"></span></p>
-                            <p class="card-text">Humidity: <span id="day5-humidity"></span></p>
+                            <p class="card-text">Temp: <span id="day5-temp">N/A</span></p>
+                            <p class="card-text">Humidity: <span id="day5-humidity">N/A</span></p>
                         </div>
                     </div>
                 </div>

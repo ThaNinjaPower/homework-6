@@ -1,4 +1,15 @@
-body {
-    background-color: bg-dark;
+.five-day-card {
     color: white;
+    width:12rem;
+    margin:10px;
+}
+
+.dark-mode {
+    background-color: #222222;
+    color: white;
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
 }
