@@ -1,4 +1,4 @@
-var key = "808d3ba8df6ac4e4cd1c7957a8c1af5a";
+var key = "06dc67478b849ab8e9987d1f78817217";
 var cityCounter = 0;
 var cityList = [];
 var sameCity = false;
