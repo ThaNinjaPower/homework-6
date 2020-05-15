@@ -81,7 +81,8 @@ function currentCityWeather(e, cityInput) {
 
         // City current temperature
         console.log(Math.round(currentResponse.main.temp) + " °F");
-        $("#city-temp-current").text(Math.round(currentResponse.main.temp) + " °F");
+        $("#city-temp-current").text(Math.round(currentResponse.main.temp) + " °F (" +
+        Math.round((currentResponse.main.temp - 32) * (5/9)) + " °C)");
 
         // City current humidity
         console.log(currentResponse.main.humidity + "%");
@@ -89,7 +90,8 @@ function currentCityWeather(e, cityInput) {
 
         // City current wind speed
         console.log(Math.round(currentResponse.wind.speed) + "mph");
-        $("#city-wind-current").text(Math.round(currentResponse.wind.speed) + " mph");
+        $("#city-wind-current").text(Math.round(currentResponse.wind.speed) + " mph (" +
+        Math.round((currentResponse.wind.speed) * 0.44704) + " m/s)");
 
         // City wind direction
         // Credit: https://stackoverflow.com/questions/7490660/converting-wind-direction-in-angles-to-text-words
@@ -158,8 +160,10 @@ function forecastedCityWeather(e, latitude, longitude) {
         $("#city-uv-current").text(forecastedResponse.current.uvi);
 
         for (var i = 1; i <= 5; i++) {
-            console.log("Day " + i + " temp: " + Math.round(forecastedResponse.daily[i].temp.day) + " °F");
-            $("#day" + i + "-temp").text(Math.round(forecastedResponse.daily[i].temp.day) + " °F");
+            console.log("Day " + i + " temp: " + Math.round(forecastedResponse.daily[i].temp.day) + " °F (" +
+            Math.round((forecastedResponse.daily[i].temp.day - 32) * (5/9)) + " °C)");
+            $("#day" + i + "-temp").text(Math.round(forecastedResponse.daily[i].temp.day) + " °F (" +
+            Math.round((forecastedResponse.daily[i].temp.day - 32) * (5/9)) + " °C)");
 
             console.log("Day " + i + " humidity: " + forecastedResponse.daily[i].humidity + "%");
             $("#day" + i + "-humidity").text(forecastedResponse.daily[i].humidity + "%");
